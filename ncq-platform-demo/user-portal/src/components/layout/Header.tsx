@@ -18,6 +18,7 @@ import { useAuthStore } from '../../stores/auth'
 import { Button } from '../ui/button'
 import { cn, getInitials, generateAvatarGradient } from '../../lib/utils'
 import { LanguageSwitcher } from './LanguageSwitcher'
+import { ProductSwitcher } from '../ProductSwitcher'
 
 interface HeaderProps {
   onMenuClick?: () => void
@@ -82,6 +83,11 @@ export function Header({ onMenuClick }: HeaderProps) {
             </div>
             <span className="hidden sm:block text-xl font-bold">NCQ Platform</span>
           </Link>
+
+          {/* Product Switcher */}
+          <div className="hidden lg:block">
+            <ProductSwitcher />
+          </div>
 
           {/* Search */}
           <div className="relative hidden md:block">

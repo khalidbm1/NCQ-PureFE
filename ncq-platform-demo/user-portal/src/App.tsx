@@ -12,6 +12,13 @@ import Files from './pages/Files'
 import Upload from './pages/Upload'
 import Analytics from './pages/Analytics'
 
+// Product Pages
+import HospitalManagement from './pages/products/HospitalManagement'
+import LLMPlatform from './pages/products/LLMPlatform'
+import SmartHospitality from './pages/products/SmartHospitality'
+import IoTPlatform from './pages/products/IoTPlatform'
+import PaymentGateway from './pages/products/PaymentGateway'
+
 const Billing = () => (
   <div className="space-y-6">
     <h1 className="text-3xl font-bold">Billing & Plans</h1>
@@ -149,6 +156,52 @@ function App() {
             element={
               <Layout>
                 <Help />
+              </Layout>
+            } 
+          />
+
+          {/* Product Routes */}
+          <Route 
+            path="/hospital" 
+            element={
+              <Layout>
+                <HospitalManagement />
+              </Layout>
+            } 
+          />
+          
+          <Route 
+            path="/llm" 
+            element={
+              <Layout>
+                <LLMPlatform />
+              </Layout>
+            } 
+          />
+          
+          <Route 
+            path="/hospitality" 
+            element={
+              <Layout>
+                <SmartHospitality />
+              </Layout>
+            } 
+          />
+          
+          <Route 
+            path="/iot" 
+            element={
+              <Layout>
+                <IoTPlatform />
+              </Layout>
+            } 
+          />
+          
+          <Route 
+            path="/payment-gateway" 
+            element={
+              <Layout>
+                <PaymentGateway />
               </Layout>
             } 
           />
