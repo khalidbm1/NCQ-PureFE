@@ -43,7 +43,7 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
           channelId: live
-          projectId: ncq-pure-frontend
+          projectId: ncq-sa
 
       - name: Comment PR with preview URL
         if: github.event_name == 'pull_request'
