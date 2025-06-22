@@ -3,7 +3,7 @@ import { useDropzone } from 'react-dropzone'
 import { 
   Upload as UploadIcon, X, FileText, Image, Video, Archive,
   CheckCircle, AlertCircle, Loader2, Cloud, HardDrive,
-  Globe, Lock, Users
+  Globe, Lock
 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/card'
 import { Button } from '../components/ui/button'

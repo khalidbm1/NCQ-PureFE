@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { 
-  BarChart3, TrendingUp, Download, Eye, FileText, 
-  Calendar, Filter, RefreshCw, ArrowUpRight, ArrowDownRight
+  BarChart3, Download, Eye, FileText, 
+  Filter, RefreshCw, ArrowUpRight, ArrowDownRight
 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../components/ui/card'
 import { Button } from '../components/ui/button'

@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { 
-  X, ChevronRight, ChevronLeft, Play, Pause, RotateCcw,
-  CheckCircle, Circle, Info
+  X, ChevronRight, ChevronLeft, Play, Pause, RotateCcw, Info
 } from 'lucide-react'
 import { Card } from './ui/card'
 import { Button } from './ui/button'
-import { Progress } from './ui/progress'
 import { toast } from 'sonner'
 
 interface JourneyStep {
@@ -14,9 +12,7 @@ interface JourneyStep {
   title: string
   description: string
   route: string
-  selector?: string
   action?: () => void
-  position?: 'top' | 'bottom' | 'left' | 'right'
 }
 
 const journeys = {
@@ -117,7 +113,6 @@ export function UserJourney() {
 
   const journey = currentJourney ? journeys[currentJourney] : null
   const currentStep = journey ? journey.steps[currentStepIndex] : null
-  const progress = journey ? ((currentStepIndex + 1) / journey.steps.length) * 100 : 0
 
   useEffect(() => {
     // Check if we should show journey on first visit
