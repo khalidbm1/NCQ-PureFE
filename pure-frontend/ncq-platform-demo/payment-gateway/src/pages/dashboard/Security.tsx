@@ -1,0 +1,9 @@
+import React from 'react'
+
+const Security: React.FC = () => {
+  return (
+    <div>Security Page</div>
+  )
+}
+
+export default Security

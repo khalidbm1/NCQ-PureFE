@@ -1,0 +1,20 @@
+{
+  "validUser": {
+    "email": "test@ncq.sa",
+    "password": "Test123!@#",
+    "firstName": "Test",
+    "lastName": "User",
+    "phoneNumber": "0501234567"
+  },
+  "adminUser": {
+    "email": "admin@ncq.sa",
+    "password": "Admin123!@#",
+    "firstName": "Admin",
+    "lastName": "User",
+    "phoneNumber": "0509876543"
+  },
+  "invalidUser": {
+    "email": "invalid@ncq.sa",
+    "password": "wrongpassword"
+  }
+}
