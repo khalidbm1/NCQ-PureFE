@@ -1,0 +1,325 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+
+    /* Analytics specific variables */
+    --analytics-bg: 248 250 252;
+    --analytics-card: 255 255 255;
+    --analytics-border: 226 232 240;
+    --analytics-text-primary: 15 23 42;
+    --analytics-text-secondary: 100 116 139;
+    --analytics-accent: 59 130 246;
+    
+    /* Toast variables */
+    --toast-bg: #ffffff;
+    --toast-color: #1f2937;
+    --toast-border: #e5e7eb;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+
+    /* Dark mode analytics variables */
+    --analytics-bg: 15 23 42;
+    --analytics-card: 30 41 59;
+    --analytics-border: 51 65 85;
+    --analytics-text-primary: 248 250 252;
+    --analytics-text-secondary: 148 163 184;
+    --analytics-accent: 96 165 250;
+    
+    /* Dark mode toast variables */
+    --toast-bg: #374151;
+    --toast-color: #f9fafb;
+    --toast-border: #4b5563;
+  }
+
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom font variables */
+  .font-display {
+    font-family: var(--font-poppins), sans-serif;
+  }
+}
+
+@layer components {
+  /* Analytics card styles */
+  .analytics-card {
+    @apply bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow duration-200;
+  }
+
+  .analytics-card-header {
+    @apply px-6 py-4 border-b border-gray-200 dark:border-gray-700;
+  }
+
+  .analytics-card-content {
+    @apply p-6;
+  }
+
+  /* Metric display styles */
+  .metric-value {
+    @apply text-3xl font-bold text-gray-900 dark:text-white tracking-tight;
+  }
+
+  .metric-label {
+    @apply text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide;
+  }
+
+  .metric-change {
+    @apply inline-flex items-center text-sm font-medium;
+  }
+
+  .metric-change.positive {
+    @apply text-green-600 dark:text-green-400;
+  }
+
+  .metric-change.negative {
+    @apply text-red-600 dark:text-red-400;
+  }
+
+  .metric-change.neutral {
+    @apply text-gray-600 dark:text-gray-400;
+  }
+
+  /* Chart container styles */
+  .chart-container {
+    @apply bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-200 dark:border-gray-700;
+  }
+
+  .chart-header {
+    @apply flex items-center justify-between mb-6;
+  }
+
+  .chart-title {
+    @apply text-lg font-semibold text-gray-900 dark:text-white;
+  }
+
+  /* Dashboard grid styles */
+  .dashboard-grid {
+    @apply grid gap-6;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .dashboard-grid-2 {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-6;
+  }
+
+  .dashboard-grid-3 {
+    @apply grid grid-cols-1 lg:grid-cols-3 gap-6;
+  }
+
+  .dashboard-grid-4 {
+    @apply grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6;
+  }
+
+  /* Loading states */
+  .skeleton {
+    @apply animate-pulse bg-gray-200 dark:bg-gray-700 rounded;
+  }
+
+  .skeleton-text {
+    @apply skeleton h-4 w-full;
+  }
+
+  .skeleton-text-sm {
+    @apply skeleton h-3 w-3/4;
+  }
+
+  .skeleton-circle {
+    @apply skeleton rounded-full;
+  }
+
+  /* Data table styles */
+  .data-table {
+    @apply w-full border-collapse bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-sm;
+  }
+
+  .data-table th {
+    @apply px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600;
+  }
+
+  .data-table td {
+    @apply px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700;
+  }
+
+  .data-table tbody tr:hover {
+    @apply bg-gray-50 dark:bg-gray-700;
+  }
+
+  /* Status indicators */
+  .status-indicator {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .status-online {
+    @apply bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200;
+  }
+
+  .status-offline {
+    @apply bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200;
+  }
+
+  .status-warning {
+    @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200;
+  }
+
+  .status-maintenance {
+    @apply bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200;
+  }
+
+  /* Animation utilities */
+  .animate-count-up {
+    animation: countUp 2s ease-out forwards;
+  }
+
+  @keyframes countUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* Dashboard layout */
+  .dashboard-layout {
+    @apply flex h-screen bg-gray-50 dark:bg-gray-900;
+  }
+
+  .dashboard-sidebar {
+    @apply hidden lg:flex lg:flex-shrink-0 lg:w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700;
+  }
+
+  .dashboard-main {
+    @apply flex-1 overflow-hidden;
+  }
+
+  .dashboard-content {
+    @apply flex-1 overflow-y-auto p-6;
+  }
+
+  /* Real-time indicators */
+  .live-indicator {
+    @apply inline-flex items-center;
+  }
+
+  .live-dot {
+    @apply w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2;
+  }
+
+  /* Tooltip styles */
+  .tooltip {
+    @apply absolute z-50 px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 pointer-events-none transition-opacity duration-300;
+  }
+
+  .tooltip.show {
+    @apply opacity-100;
+  }
+
+  .tooltip::before {
+    @apply absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0;
+    content: '';
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #111827;
+  }
+}
+
+@layer utilities {
+  /* Custom scrollbar */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    @apply bg-gray-100 dark:bg-gray-800;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 dark:bg-gray-600 rounded-full;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-500 dark:bg-gray-500;
+  }
+
+  /* Text utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Focus utilities */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent;
+  }
+
+  /* Chart responsive utilities */
+  .chart-responsive {
+    aspect-ratio: 16 / 9;
+  }
+
+  @media (max-width: 768px) {
+    .chart-responsive {
+      aspect-ratio: 4 / 3;
+    }
+  }
+}

@@ -1,0 +1,104 @@
+# Multi-stage Docker build for optimized NCQ Platform frontend
+FROM node:18-alpine AS base
+
+# Install dependencies only when needed
+FROM base AS deps
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+
+# Copy package files
+COPY package.json package-lock.json* ./
+COPY build-config/package.json ./build-config/
+COPY design-system/package.json ./design-system/
+
+# Install dependencies
+RUN npm ci --only=production && npm cache clean --force
+
+# Rebuild the source code only when needed
+FROM base AS builder
+WORKDIR /app
+
+# Copy dependencies
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+
+# Set build environment
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV GENERATE_SOURCEMAP=false
+
+# Build arguments
+ARG BUILD_TARGET=production
+ARG BUNDLER=vite
+ARG ENABLE_ANALYTICS=false
+ARG MODULE_FEDERATION=false
+
+# Install build dependencies
+RUN npm install --save-dev @types/node typescript
+
+# Build the application
+RUN if [ "$BUNDLER" = "webpack" ]; then \
+      npm run build:webpack; \
+    else \
+      npm run build:vite; \
+    fi
+
+# Generate build report
+RUN node build-config/scripts/build-optimizer.js --bundler $BUNDLER
+
+# Production image, copy all the files and run nginx
+FROM nginx:alpine AS runner
+
+# Set working directory
+WORKDIR /usr/share/nginx/html
+
+# Copy custom nginx config
+COPY build-config/docker/nginx.conf /etc/nginx/nginx.conf
+COPY build-config/docker/default.conf /etc/nginx/conf.d/default.conf
+
+# Remove default nginx static assets
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copy built application
+COPY --from=builder /app/dist .
+
+# Copy build artifacts for debugging
+COPY --from=builder /app/dist/build-report.html ./reports/
+COPY --from=builder /app/dist/build-stats.json ./reports/
+
+# Create nginx user and set permissions
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nextjs -u 1001
+
+# Set ownership
+RUN chown -R nextjs:nodejs /usr/share/nginx/html
+RUN chown -R nextjs:nodejs /var/cache/nginx
+RUN chown -R nextjs:nodejs /var/log/nginx
+RUN chown -R nextjs:nodejs /etc/nginx/conf.d
+
+# Create temp directories for nginx
+RUN mkdir -p /tmp/nginx/client-body
+RUN mkdir -p /tmp/nginx/proxy
+RUN mkdir -p /tmp/nginx/fastcgi
+RUN mkdir -p /tmp/nginx/uwsgi
+RUN mkdir -p /tmp/nginx/scgi
+RUN chown -R nextjs:nodejs /tmp/nginx
+
+# Switch to non-root user
+USER nextjs
+
+# Expose port
+EXPOSE 3000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:3000/health || exit 1
+
+# Labels
+LABEL maintainer="NCQ Development Team"
+LABEL version="1.0.0"
+LABEL description="NCQ Platform Frontend"
+LABEL org.opencontainers.image.source="https://github.com/NCQ-sa/ncq-platform"
+
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]

@@ -2,31 +2,15 @@ import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { Toaster } from 'sonner'
 import { Layout } from './components/layout/Layout'
+import { useAuthStore } from './stores/auth'
+import { CredentialsPanel } from './components/CredentialsPanel'
+import { UserJourney } from './components/UserJourney'
 
 // Main Pages
 import Dashboard from './pages/Dashboard'
-
-// Placeholder pages for routing
-const Files = () => (
-  <div className="space-y-6">
-    <h1 className="text-3xl font-bold">My Files</h1>
-    <p className="text-muted-foreground">File management interface - Coming soon</p>
-  </div>
-)
-
-const Upload = () => (
-  <div className="space-y-6">
-    <h1 className="text-3xl font-bold">Upload Files</h1>
-    <p className="text-muted-foreground">File upload interface - Coming soon</p>
-  </div>
-)
-
-const Analytics = () => (
-  <div className="space-y-6">
-    <h1 className="text-3xl font-bold">Analytics</h1>
-    <p className="text-muted-foreground">Analytics dashboard - Coming soon</p>
-  </div>
-)
+import Files from './pages/Files'
+import Upload from './pages/Upload'
+import Analytics from './pages/Analytics'
 
 const Billing = () => (
   <div className="space-y-6">
@@ -64,8 +48,11 @@ const Help = () => (
 )
 
 function App() {
-  // Initialize dark mode
+  const { login } = useAuthStore()
+
+  // Initialize dark mode and auto-login
   useEffect(() => {
+    // Set theme
     const theme = localStorage.getItem('theme')
     const isDark = theme === 'dark' || 
       (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)
@@ -75,7 +62,10 @@ function App() {
     } else {
       document.documentElement.classList.remove('dark')
     }
-  }, [])
+
+    // Auto-login with mock credentials
+    login({ email: 'user@ncq.sa', password: 'user123' })
+  }, [login])
 
   return (
     <Router>
@@ -177,6 +167,12 @@ function App() {
           richColors
           closeButton
         />
+
+        {/* Credentials Panel */}
+        <CredentialsPanel />
+
+        {/* User Journey Guide */}
+        <UserJourney />
       </div>
     </Router>
   )

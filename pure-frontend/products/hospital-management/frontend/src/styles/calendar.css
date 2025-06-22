@@ -1,0 +1,155 @@
+/* FullCalendar Custom Styles with NCQ Design */
+
+/* Main calendar container */
+.fc {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* Calendar header toolbar */
+.fc .fc-toolbar {
+  padding: 1rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.dark .fc .fc-toolbar-title {
+  color: #f9fafb;
+}
+
+/* Buttons */
+.fc .fc-button {
+  background-color: #16a34a;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.fc .fc-button:hover {
+  background-color: #15803d;
+}
+
+.fc .fc-button:disabled {
+  background-color: #d1d5db;
+  opacity: 0.6;
+}
+
+.fc .fc-button-active {
+  background-color: #15803d !important;
+}
+
+/* Calendar grid */
+.fc .fc-col-header-cell {
+  padding: 0.75rem 0;
+  background-color: #f9fafb;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.dark .fc .fc-col-header-cell {
+  background-color: #1f2937;
+  color: #9ca3af;
+}
+
+/* Day cells */
+.fc .fc-daygrid-day {
+  border-color: #e5e7eb;
+}
+
+.dark .fc .fc-daygrid-day {
+  border-color: #374151;
+}
+
+.fc .fc-daygrid-day-number {
+  padding: 0.5rem;
+  color: #374151;
+  font-weight: 500;
+}
+
+.dark .fc .fc-daygrid-day-number {
+  color: #d1d5db;
+}
+
+/* Today */
+.fc .fc-day-today {
+  background-color: #dcfce7 !important;
+}
+
+.dark .fc .fc-day-today {
+  background-color: #14532d !important;
+}
+
+/* Events */
+.fc .fc-event {
+  border: none;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.fc .fc-event:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Event colors based on type */
+.fc-event-appointment {
+  background-color: #16a34a;
+  color: white;
+}
+
+.fc-event-surgery {
+  background-color: #dc2626;
+  color: white;
+}
+
+.fc-event-meeting {
+  background-color: #2563eb;
+  color: white;
+}
+
+.fc-event-break {
+  background-color: #6b7280;
+  color: white;
+}
+
+/* Time grid */
+.fc .fc-timegrid-slot {
+  height: 3rem;
+}
+
+.fc .fc-timegrid-axis {
+  padding: 0 0.5rem;
+}
+
+/* Week/Day view adjustments */
+.fc .fc-timegrid-event {
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .fc .fc-toolbar {
+    flex-direction: column;
+  }
+  
+  .fc .fc-toolbar-title {
+    font-size: 1.25rem;
+  }
+  
+  .fc .fc-button {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+  }
+}
