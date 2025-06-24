@@ -7,13 +7,7 @@ import { Card } from './ui/card'
 import { Button } from './ui/button'
 import { toast } from 'sonner'
 
-interface JourneyStep {
-  id: string
-  title: string
-  description: string
-  route: string
-  action?: () => void
-}
+// Removed unused interface
 
 const journeys = {
   fileManagement: {
@@ -159,8 +153,8 @@ export function UserJourney() {
       setCurrentStepIndex(nextIndex)
       const nextStep = journey.steps[nextIndex]
       
-      if (nextStep.action) {
-        nextStep.action()
+      if ((nextStep as any).action) {
+        (nextStep as any).action()
       }
       
       if (location.pathname !== nextStep.route) {

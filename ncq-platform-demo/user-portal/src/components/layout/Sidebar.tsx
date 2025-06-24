@@ -11,6 +11,11 @@ import {
   BarChart3,
   Users,
   X,
+  Building2,
+  Brain,
+  Hotel,
+  Wifi,
+  CreditCard as PaymentIcon,
 } from 'lucide-react'
 import { cn } from '../../lib/utils'
 import { useAuthStore } from '../../stores/auth'
@@ -58,6 +63,34 @@ const accountNavigation = [
     name: 'Team',
     href: '/team',
     icon: Users,
+  },
+]
+
+const productNavigation = [
+  {
+    name: 'Hospital Management',
+    href: '/hospital',
+    icon: Building2,
+  },
+  {
+    name: 'LLM Platform',
+    href: '/llm',
+    icon: Brain,
+  },
+  {
+    name: 'Smart Buildings',
+    href: '/smart-buildings',
+    icon: Building2,
+  },
+  {
+    name: 'IoT Platform',
+    href: '/iot',
+    icon: Wifi,
+  },
+  {
+    name: 'Payment Gateway',
+    href: '/payment-gateway',
+    icon: PaymentIcon,
   },
 ]
 
@@ -123,6 +156,18 @@ export function Sidebar({ open, onOpenChange }: SidebarProps) {
             </h3>
             <div className="space-y-1 mt-2">
               {navigation.map((item) => (
+                <NavItem key={item.name} item={item} />
+              ))}
+            </div>
+          </div>
+
+          {/* Products Section */}
+          <div className="space-y-1">
+            <h3 className="px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+              Products
+            </h3>
+            <div className="space-y-1 mt-2">
+              {productNavigation.map((item) => (
                 <NavItem key={item.name} item={item} />
               ))}
             </div>
@@ -216,6 +261,21 @@ export function Sidebar({ open, onOpenChange }: SidebarProps) {
                   </h3>
                   <div className="space-y-1 mt-2">
                     {navigation.map((item) => (
+                      <NavItem 
+                        key={item.name} 
+                        item={item} 
+                        onClick={() => onOpenChange(false)}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <h3 className="px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    Products
+                  </h3>
+                  <div className="space-y-1 mt-2">
+                    {productNavigation.map((item) => (
                       <NavItem 
                         key={item.name} 
                         item={item} 

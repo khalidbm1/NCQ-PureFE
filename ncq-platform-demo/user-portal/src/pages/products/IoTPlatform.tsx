@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { 
-  Wifi, Cpu, Activity, Zap, Globe, Shield, AlertTriangle,
+  Wifi, Cpu, Activity, Zap, Shield, AlertTriangle,
   Thermometer, Droplets, Wind, Battery, Signal, Settings,
-  PlayCircle, PauseCircle, RefreshCw, Download, Upload
+  PlayCircle, PauseCircle, RefreshCw, Download
 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../components/ui/card'
 import { Button } from '../../components/ui/button'
@@ -121,7 +121,7 @@ const StatusBadge = ({ status }: { status: string }) => {
   }
   
   return (
-    <Badge variant={variants[status as keyof typeof variants] || 'outline'}>
+    <Badge variant={variants[status as keyof typeof variants] as any || 'outline'}>
       {status}
     </Badge>
   )
@@ -339,7 +339,7 @@ export default function IoTPlatform() {
                       <div>
                         <p className="font-medium">{device.name}</p>
                         <p className="text-sm text-muted-foreground">
-                          {device.data.value || device.data.temperature || device.data.power} {device.data.unit} • {device.location}
+                          {(device.data as any).value || device.data.temperature || device.data.power || device.data.aqi || device.data.flow || (device.data as any).count} {device.data.unit} • {device.location}
                         </p>
                       </div>
                     </div>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { 
-  Brain, Sparkles, MessageSquare, Code, Zap, Shield,
-  BarChart3, Globe, Cpu, Database, Play, Settings,
+  Brain, MessageSquare, Zap, Shield,
+  Cpu, Play,
   FileText, Copy, Check, Send, Loader2
 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../components/ui/card'

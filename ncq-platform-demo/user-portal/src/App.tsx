@@ -15,7 +15,7 @@ import Analytics from './pages/Analytics'
 // Product Pages
 import HospitalManagement from './pages/products/HospitalManagement'
 import LLMPlatform from './pages/products/LLMPlatform'
-import SmartHospitality from './pages/products/SmartHospitality'
+import SmartBuildings from './pages/products/SmartBuildings'
 import IoTPlatform from './pages/products/IoTPlatform'
 import PaymentGateway from './pages/products/PaymentGateway'
 
@@ -180,10 +180,10 @@ function App() {
           />
           
           <Route 
-            path="/hospitality" 
+            path="/smart-buildings" 
             element={
               <Layout>
-                <SmartHospitality />
+                <SmartBuildings />
               </Layout>
             } 
           />

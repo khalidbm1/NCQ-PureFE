@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { 
   CreditCard, DollarSign, TrendingUp, Shield, Globe, 
-  CheckCircle, XCircle, Clock, ArrowUpRight, ArrowDownRight,
-  Smartphone, ShoppingCart, Store, RefreshCw, FileText
+  CheckCircle, XCircle, Clock,
+  ShoppingCart, Store, RefreshCw, FileText
 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../components/ui/card'
 import { Button } from '../../components/ui/button'
