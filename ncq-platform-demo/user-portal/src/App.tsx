@@ -18,6 +18,7 @@ import LLMPlatform from './pages/products/LLMPlatform'
 import SmartBuildings from './pages/products/SmartBuildings'
 import IoTPlatform from './pages/products/IoTPlatform'
 import PaymentGateway from './pages/products/PaymentGateway'
+import HospitalityHub from './pages/products/HospitalityHub'
 
 const Billing = () => (
   <div className="space-y-6">
@@ -202,6 +203,15 @@ function App() {
             element={
               <Layout>
                 <PaymentGateway />
+              </Layout>
+            } 
+          />
+
+          <Route 
+            path="/hospitality" 
+            element={
+              <Layout>
+                <HospitalityHub />
               </Layout>
             } 
           />

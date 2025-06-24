@@ -1,11 +1,11 @@
 import { useState, useRef, Suspense } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls, Box, Sphere, Plane, Text, Line, useAnimations, Float } from '@react-three/drei'
+import { OrbitControls, Box, Sphere } from '@react-three/drei'
 import * as THREE from 'three'
 import { 
-  Building2, Zap, Thermometer, Lightbulb, DoorOpen, 
+  Zap, Thermometer, Lightbulb, DoorOpen, 
   Users, Car, ShieldCheck, AlertTriangle, Activity,
-  TrendingUp, Battery, Gauge, TreePine
+  TrendingUp, TreePine, Wind, Droplets
 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '../../components/ui/card'
 import { Button } from '../../components/ui/button'
@@ -136,7 +136,6 @@ function Gate({ position, open }: { position: [number, number, number], open: bo
 
 function Person({ position, path }: { position: [number, number, number], path?: [number, number, number][] }) {
   const meshRef = useRef<THREE.Group>(null)
-  const [currentPos, setCurrentPos] = useState(0)
   
   useFrame((state) => {
     if (meshRef.current && path && path.length > 1) {
@@ -190,7 +189,7 @@ function Building3D() {
       
       {/* Parking Spots */}
       {sensors.parking.map((spot) => (
-        <ParkingSpot key={spot.id} position={spot.position} occupied={spot.occupied} />
+        <ParkingSpot key={spot.id} position={spot.position as [number, number, number]} occupied={spot.occupied} />
       ))}
       
       {/* Gate */}
@@ -198,12 +197,12 @@ function Building3D() {
       
       {/* Motion Sensors */}
       {sensors.motion.map((sensor) => (
-        <MotionSensor key={sensor.id} position={sensor.position} detected={sensor.detected} />
+        <MotionSensor key={sensor.id} position={sensor.position as [number, number, number]} detected={sensor.detected} />
       ))}
       
       {/* Lights */}
       {sensors.lighting.map((light) => (
-        <Light key={light.id} position={light.position} on={light.on} />
+        <Light key={light.id} position={light.position as [number, number, number]} on={light.on} />
       ))}
       
       {/* Animated People */}

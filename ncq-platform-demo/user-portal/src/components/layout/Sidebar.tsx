@@ -92,6 +92,11 @@ const productNavigation = [
     href: '/payment-gateway',
     icon: PaymentIcon,
   },
+  {
+    name: 'Hospitality Hub',
+    href: '/hospitality',
+    icon: Hotel,
+  },
 ]
 
 const settingsNavigation = [
