@@ -1,6 +1,13 @@
-# NCQ Platform User Portal
+# NCQ Platform - User Portal
 
-A modern, responsive user portal for the NCQ Platform built with React, TypeScript, and Tailwind CSS.
+A modern, responsive web application for smart hospitality and building management with AI-powered insights.
+
+## 🚀 Quick Deploy
+
+Deploy your own instance with one click:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/ncq-platform)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/YOUR_USERNAME/ncq-platform)
 
 ## Features
 

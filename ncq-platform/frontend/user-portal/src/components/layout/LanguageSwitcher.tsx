@@ -11,6 +11,9 @@ export function LanguageSwitcher() {
 
   return (
     <select
+      id="language-switcher"
+      name="language"
+      aria-label="Language"
       onChange={(e) => changeLanguage(e.target.value)}
       value={i18n.language}
       className="rounded-md border border-input bg-background px-2 py-1 text-sm"

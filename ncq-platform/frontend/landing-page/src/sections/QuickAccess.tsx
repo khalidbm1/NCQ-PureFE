@@ -60,7 +60,7 @@ export function QuickAccess() {
             <div className="space-y-3">
               <Button 
                 className="w-full group" 
-                onClick={() => window.location.href = 'http://localhost:3002'}
+                onClick={() => window.location.href = '/user-portal/'}
               >
                 {t('quickAccess.userPortal.button')}
                 <ArrowRight className="w-4 h-4 ml-2 rtl:mr-2 rtl:ml-0 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" />
@@ -107,7 +107,7 @@ export function QuickAccess() {
             <div className="space-y-3">
               <Button 
                 className="w-full group" 
-                onClick={() => window.location.href = 'http://localhost:3001'}
+                onClick={() => window.location.href = '/admin/'}
               >
                 {t('quickAccess.adminDashboard.button')}
                 <ArrowRight className="w-4 h-4 ml-2 rtl:mr-2 rtl:ml-0 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" />

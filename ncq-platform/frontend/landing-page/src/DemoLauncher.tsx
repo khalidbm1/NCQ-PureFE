@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import {
-  Hospital,
+  Building2,
   BedDouble,
   Brain,
   CreditCard,
@@ -18,7 +18,7 @@ function DemoLauncher() {
   const products = [
     {
       name: 'Hospital Management',
-      icon: Hospital,
+      icon: Building2,
       color: 'red',
       bg: 'bg-red-100',
       text: 'text-red-600',

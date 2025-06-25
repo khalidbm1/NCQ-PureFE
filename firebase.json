@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "ncq-platform-demo/user-portal/dist",
+    "public": "dist",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -8,8 +8,55 @@
     ],
     "rewrites": [
       {
+        "source": "/smart-buildings/**",
+        "destination": "/smart-buildings/index.html"
+      },
+      {
+        "source": "/admin/**",
+        "destination": "/admin/index.html"
+      },
+      {
+        "source": "/user-portal/**",
+        "destination": "/user-portal/index.html"
+      },
+      {
+        "source": "/hospital/**",
+        "destination": "/hospital/index.html"
+      },
+      {
+        "source": "/iot/**",
+        "destination": "/iot/index.html"
+      },
+      {
+        "source": "/llm/**",
+        "destination": "/llm/index.html"
+      },
+      {
+        "source": "/payment/**",
+        "destination": "/payment/index.html"
+      },
+      {
+        "source": "/api-portal/**",
+        "destination": "/api-portal/index.html"
+      },
+      {
+        "source": "/hospitality/**",
+        "destination": "/hospitality/index.html"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(js|jsx|ts|tsx|css)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
+        ]
       }
     ]
   }

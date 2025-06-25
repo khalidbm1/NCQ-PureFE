@@ -6,6 +6,16 @@ import { Layout } from './components/layout/Layout'
 // Main Pages
 import Dashboard from './pages/Dashboard'
 
+// Product Pages
+import HospitalManagement from './pages/products/HospitalManagement'
+import LLMPlatform from './pages/products/LLMPlatform'
+import IoTPlatform from './pages/products/IoTPlatform'
+import PaymentGateway from './pages/products/PaymentGateway'
+import SmartBuildings from './pages/SmartBuildings'
+import HospitalityHub from './pages/products/HospitalityHub'
+import TravelerPortal from './pages/products/TravelerPortal'
+import BusinessDashboard from './pages/products/BusinessDashboard'
+
 // Placeholder pages for routing
 const Files = () => (
   <div className="space-y-6">
@@ -159,6 +169,79 @@ function App() {
             element={
               <Layout>
                 <Help />
+              </Layout>
+            } 
+          />
+
+          {/* Product Routes */}
+          <Route 
+            path="/hospital" 
+            element={
+              <Layout>
+                <HospitalManagement />
+              </Layout>
+            } 
+          />
+
+          <Route 
+            path="/llm" 
+            element={
+              <Layout>
+                <LLMPlatform />
+              </Layout>
+            } 
+          />
+
+          <Route 
+            path="/iot" 
+            element={
+              <Layout>
+                <IoTPlatform />
+              </Layout>
+            } 
+          />
+
+          <Route 
+            path="/payment-gateway" 
+            element={
+              <Layout>
+                <PaymentGateway />
+              </Layout>
+            } 
+          />
+
+          <Route 
+            path="/smart-buildings" 
+            element={
+              <Layout>
+                <SmartBuildings />
+              </Layout>
+            } 
+          />
+
+          <Route 
+            path="/hospitality-hub" 
+            element={
+              <Layout>
+                <HospitalityHub />
+              </Layout>
+            } 
+          />
+
+          <Route 
+            path="/traveler-portal" 
+            element={
+              <Layout>
+                <TravelerPortal />
+              </Layout>
+            } 
+          />
+
+          <Route 
+            path="/business-dashboard" 
+            element={
+              <Layout>
+                <BusinessDashboard />
               </Layout>
             } 
           />

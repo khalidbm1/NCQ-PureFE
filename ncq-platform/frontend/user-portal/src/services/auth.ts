@@ -1,5 +1,7 @@
 import { api } from './api'
 import type { LoginCredentials, RegisterData, User, AuthResponse } from '../types/user'
+import { env } from '../config/env'
+import { createMockUser } from '../lib/mockData'
 
 class AuthService {
   setToken(token: string) {
@@ -57,6 +59,12 @@ class AuthService {
   }
 
   async validateToken(): Promise<User> {
+    // Check if pure frontend mode
+    if (env.PURE_FRONTEND) {
+      // Return mock user in pure frontend mode
+      return createMockUser()
+    }
+    
     const response = await api.get('/auth/api/v1/auth/me')
     return response.data.user
   }

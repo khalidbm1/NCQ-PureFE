@@ -2,7 +2,9 @@ import axios, { AxiosInstance, AxiosError } from 'axios'
 import { toast } from 'sonner'
 
 // API Base URL
-const baseURL = (import.meta as any).env?.VITE_API_URL || 'https://api.ncq.sa'
+// For pure frontend demo, use localhost or disable API calls
+const baseURL = (import.meta as any).env?.VITE_API_URL || 'http://localhost:3001'
+const isPureFrontend = (import.meta as any).env?.VITE_PURE_FRONTEND === 'true'
 
 // Create axios instance
 export const api: AxiosInstance = axios.create({

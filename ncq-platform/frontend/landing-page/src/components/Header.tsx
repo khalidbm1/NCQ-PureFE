@@ -67,10 +67,10 @@ export function Header() {
           <div className="hidden md:flex items-center gap-4 rtl:gap-4">
             <ThemeToggle />
             <LanguageSwitcher />
-            <Button variant="ghost" size="sm" onClick={() => window.location.href = 'http://localhost:3001'}>
+            <Button variant="ghost" size="sm" onClick={() => window.location.href = '/admin/'}>
               {t('header.adminLogin')}
             </Button>
-            <Button size="sm" onClick={() => window.location.href = 'http://localhost:3002'}>
+            <Button size="sm" onClick={() => window.location.href = '/user-portal/'}>
               {t('common.getStarted')}
             </Button>
           </div>
@@ -108,10 +108,10 @@ export function Header() {
                 <LanguageSwitcher />
               </div>
               <div className="flex flex-col space-y-2 pt-4 border-t border-gray-200 dark:border-gray-700">
-                <Button variant="outline" size="sm" onClick={() => window.location.href = 'http://localhost:3001'}>
+                <Button variant="outline" size="sm" onClick={() => window.location.href = '/admin/'}>
                   {t('header.adminLogin')}
                 </Button>
-                <Button size="sm" onClick={() => window.location.href = 'http://localhost:3002'}>
+                <Button size="sm" onClick={() => window.location.href = '/user-portal/'}>
                   {t('common.getStarted')}
                 </Button>
               </div>

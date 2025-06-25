@@ -42,6 +42,8 @@ export interface User {
     lastLoginAt: string
     createdAt: string
   }
+  createdAt: string
+  updatedAt: string
 }
 
 export interface LoginCredentials {

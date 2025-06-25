@@ -20,12 +20,21 @@ interface AuthState {
   setLoading: (loading: boolean) => void
 }
 
+import { env } from '../config/env'
+import { createMockUser } from '../lib/mockData'
+
+// Check if pure frontend mode
+const isPureFrontend = env.PURE_FRONTEND
+
+// Mock user for pure frontend mode
+const mockUser = isPureFrontend ? createMockUser() : null
+
 export const useAuthStore = create<AuthState>()( 
   persist(
     (set, get) => ({
-      user: null,
-      token: null,
-      isAuthenticated: false,
+      user: mockUser,
+      token: isPureFrontend ? 'mock-token' : null,
+      isAuthenticated: isPureFrontend,
       isLoading: false,
       error: null,
 
@@ -77,7 +86,9 @@ export const useAuthStore = create<AuthState>()(
                 apiCalls: 8934,
                 lastLoginAt: new Date().toISOString(),
                 createdAt: '2024-01-01T00:00:00Z'
-              }
+              },
+              createdAt: '2024-01-01T00:00:00Z',
+              updatedAt: new Date().toISOString()
             }
             
             const mockAccessToken = 'mock-jwt-token-' + Date.now()
@@ -162,7 +173,9 @@ export const useAuthStore = create<AuthState>()(
                   apiCalls: 8934,
                   lastLoginAt: new Date().toISOString(),
                   createdAt: '2024-01-01T00:00:00Z'
-                }
+                },
+                createdAt: '2024-01-01T00:00:00Z',
+                updatedAt: new Date().toISOString()
               }
               
               const mockAccessToken = 'mock-jwt-token-' + Date.now()
@@ -243,7 +256,9 @@ export const useAuthStore = create<AuthState>()(
               apiCalls: 0,
               lastLoginAt: new Date().toISOString(),
               createdAt: new Date().toISOString()
-            }
+            },
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString()
           }
           
           const mockAccessToken = 'mock-jwt-token-' + Date.now()

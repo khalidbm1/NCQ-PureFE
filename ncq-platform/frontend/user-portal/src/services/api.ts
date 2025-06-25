@@ -1,8 +1,9 @@
 import axios, { AxiosInstance, AxiosError } from 'axios'
 import { toast } from 'sonner'
+import { env } from '../config/env'
 
-// API Base URL
-const baseURL = (import.meta as any).env?.VITE_API_URL || 'https://api.ncq.sa'
+// API Base URL - use local in pure frontend mode
+const baseURL = env.PURE_FRONTEND ? window.location.origin : (env.API_URL || 'https://api.ncq.sa')
 
 // Create axios instance
 export const api: AxiosInstance = axios.create({

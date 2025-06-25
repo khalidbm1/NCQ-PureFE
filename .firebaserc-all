@@ -1,0 +1,24 @@
+{
+  "projects": {
+    "default": "ncq-sa"
+  },
+  "targets": {
+    "ncq-sa": {
+      "hosting": {
+        "user-portal": ["ncq-sa"],
+        "admin-dashboard": ["ncq-admin"],
+        "hospital-management": ["ncq-hospital"],
+        "smart-building": ["ncq-smart-building"],
+        "api-portal": ["ncq-api-portal"],
+        "iot-platform": ["ncq-iot"],
+        "llm-platform": ["ncq-llm"],
+        "payment-gateway": ["ncq-payment"],
+        "payment-admin": ["ncq-payment-admin"],
+        "payment-merchant": ["ncq-payment-merchant"],
+        "hospitality-staff": ["ncq-hospitality-staff"],
+        "smart-hospitality": ["ncq-hospitality"],
+        "landing-page": ["ncq-landing"]
+      }
+    }
+  }
+}

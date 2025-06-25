@@ -114,12 +114,12 @@ type ToastProps = React.ComponentPropsWithoutRef<typeof Toast>
 
 type ToastActionElement = React.ReactElement<typeof ToastAction>
 
-interface ToastData {
+interface ToastData extends ToastProps {
   id: string
   title?: string
   description?: string
   action?: ToastActionElement
-} & ToastProps
+}
 
 const TOAST_LIMIT = 1
 const TOAST_REMOVE_DELAY = 1000000

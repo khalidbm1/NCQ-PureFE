@@ -11,6 +11,11 @@ import {
   BarChart3,
   Users,
   X,
+  Building2,
+  Heart,
+  Brain,
+  Wifi,
+  Hotel,
 } from 'lucide-react'
 import { cn } from '../../lib/utils'
 import { useAuthStore } from '../../stores/auth'
@@ -39,6 +44,49 @@ const navigation = [
   {
     name: 'Analytics',
     href: '/analytics',
+    icon: BarChart3,
+  },
+]
+
+const productNavigation = [
+  {
+    name: 'Hospital Management',
+    href: '/hospital',
+    icon: Heart,
+  },
+  {
+    name: 'LLM Platform',
+    href: '/llm',
+    icon: Brain,
+  },
+  {
+    name: 'IoT Platform',
+    href: '/iot',
+    icon: Wifi,
+  },
+  {
+    name: 'Payment Gateway',
+    href: '/payment-gateway',
+    icon: CreditCard,
+  },
+  {
+    name: 'Smart Buildings',
+    href: '/smart-buildings',
+    icon: Building2,
+  },
+  {
+    name: 'Hospitality Hub',
+    href: '/hospitality-hub',
+    icon: Hotel,
+  },
+  {
+    name: 'Traveler Portal',
+    href: '/traveler-portal',
+    icon: Users,
+  },
+  {
+    name: 'Business Dashboard',
+    href: '/business-dashboard',
     icon: BarChart3,
   },
 ]
@@ -123,6 +171,18 @@ export function Sidebar({ open, onOpenChange }: SidebarProps) {
             </h3>
             <div className="space-y-1 mt-2">
               {navigation.map((item) => (
+                <NavItem key={item.name} item={item} />
+              ))}
+            </div>
+          </div>
+
+          {/* Products Section */}
+          <div className="space-y-1">
+            <h3 className="px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+              Products
+            </h3>
+            <div className="space-y-1 mt-2">
+              {productNavigation.map((item) => (
                 <NavItem key={item.name} item={item} />
               ))}
             </div>
@@ -216,6 +276,21 @@ export function Sidebar({ open, onOpenChange }: SidebarProps) {
                   </h3>
                   <div className="space-y-1 mt-2">
                     {navigation.map((item) => (
+                      <NavItem 
+                        key={item.name} 
+                        item={item} 
+                        onClick={() => onOpenChange(false)}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-1">
+                  <h3 className="px-3 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    Products
+                  </h3>
+                  <div className="space-y-1 mt-2">
+                    {productNavigation.map((item) => (
                       <NavItem 
                         key={item.name} 
                         item={item} 
