@@ -5,6 +5,7 @@ import { Layout } from './components/layout/Layout'
 
 // Main Pages
 import Dashboard from './pages/Dashboard'
+import PlatformLanding from './pages/PlatformLanding'
 
 // Product Pages
 import HospitalManagement from './pages/products/HospitalManagement'
@@ -12,6 +13,7 @@ import LLMPlatform from './pages/products/LLMPlatform'
 import IoTPlatform from './pages/products/IoTPlatform'
 import PaymentGateway from './pages/products/PaymentGateway'
 import SmartBuildings from './pages/SmartBuildings'
+import Building3D from './pages/Building3D'
 import HospitalityHub from './pages/products/HospitalityHub'
 import TravelerPortal from './pages/products/TravelerPortal'
 import BusinessDashboard from './pages/products/BusinessDashboard'
@@ -220,6 +222,13 @@ function App() {
           />
 
           <Route 
+            path="/building-3d" 
+            element={
+              <Building3D />
+            } 
+          />
+
+          <Route 
             path="/hospitality-hub" 
             element={
               <Layout>
@@ -246,8 +255,18 @@ function App() {
             } 
           />
 
+          {/* Platform Landing */}
+          <Route 
+            path="/platform" 
+            element={
+              <Layout>
+                <PlatformLanding />
+              </Layout>
+            } 
+          />
+
           {/* Default redirect */}
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/" element={<Navigate to="/platform" replace />} />
           
           {/* Catch all route */}
           <Route path="*" element={<Navigate to="/dashboard" replace />} />

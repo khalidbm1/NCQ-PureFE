@@ -16,6 +16,8 @@ import {
   Brain,
   Wifi,
   Hotel,
+  Box,
+  Zap,
 } from 'lucide-react'
 import { cn } from '../../lib/utils'
 import { useAuthStore } from '../../stores/auth'
@@ -26,6 +28,11 @@ interface SidebarProps {
 }
 
 const navigation = [
+  {
+    name: 'Platform Overview',
+    href: '/platform',
+    icon: Zap,
+  },
   {
     name: 'Dashboard',
     href: '/dashboard',
@@ -73,6 +80,11 @@ const productNavigation = [
     name: 'Smart Buildings',
     href: '/smart-buildings',
     icon: Building2,
+  },
+  {
+    name: '3D Building',
+    href: '/building-3d',
+    icon: Box,
   },
   {
     name: 'Hospitality Hub',

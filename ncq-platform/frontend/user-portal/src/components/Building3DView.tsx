@@ -112,8 +112,20 @@ export default function Building3DView({ isActive, onToggle }: Building3DViewPro
 
     // Initialize Babylon.js
     const canvas = canvasRef.current;
+    
+    // Check WebGL support
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if (!gl) {
+      console.error('Building3DView: WebGL not supported!');
+      alert('WebGL is not supported in your browser. The 3D view cannot be displayed.');
+      return;
+    }
+    console.log('Building3DView: WebGL is supported');
+    
     const engine = new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true });
     engineRef.current = engine;
+    
+    console.log('Building3DView: Babylon.js engine created:', engine);
 
     // Create scene
     const scene = new BABYLON.Scene(engine);
@@ -133,6 +145,15 @@ export default function Building3DView({ isActive, onToggle }: Building3DViewPro
     camera.lowerRadiusLimit = 20;
     camera.upperRadiusLimit = 150;
     camera.attachControl(canvas, true);
+    
+    // Add a simple test mesh to ensure rendering works
+    const testSphere = BABYLON.MeshBuilder.CreateSphere('testSphere', { diameter: 5 }, scene);
+    testSphere.position = new BABYLON.Vector3(0, 10, 0);
+    const testMaterial = new BABYLON.StandardMaterial('testMat', scene);
+    testMaterial.diffuseColor = new BABYLON.Color3(1, 0, 0); // Red color
+    testMaterial.emissiveColor = new BABYLON.Color3(0.5, 0, 0); // Glowing red
+    testSphere.material = testMaterial;
+    console.log('Building3DView: Test sphere created at', testSphere.position);
 
     // Enhanced lighting setup
     const light1 = new BABYLON.DirectionalLight('dirLight', new BABYLON.Vector3(-1, -2, -1), scene);
@@ -177,6 +198,7 @@ export default function Building3DView({ isActive, onToggle }: Building3DViewPro
     skybox.infiniteDistance = true;
 
     // Create ground with grid material - expanded size
+    console.log('Building3DView: Creating ground and roads...');
     const ground = BABYLON.MeshBuilder.CreateGround('ground', { width: 150, height: 150 }, scene);
     const gridMaterial = new GridMaterial('gridMaterial', scene);
     gridMaterial.majorUnitFrequency = 5;
@@ -187,6 +209,7 @@ export default function Building3DView({ isActive, onToggle }: Building3DViewPro
     ground.material = gridMaterial;
     ground.position.y = -0.1;
     ground.receiveShadows = true;
+    console.log('Building3DView: Ground created successfully');
 
     // Create roads with realistic asphalt texture
     const createRoad = (width: number, length: number, x: number, z: number, rotation: number = 0) => {
@@ -932,17 +955,27 @@ export default function Building3DView({ isActive, onToggle }: Building3DViewPro
     createSwimmingPool(25, 40);   // Wellness center
 
     // Create buildings
-    BUILDING_DATA.buildings.forEach((building) => {
-      const height = building.floors * 3;
-      const width = 6 + Math.random() * 2; // Vary building widths
-      const depth = 6 + Math.random() * 2; // Vary building depths
-      
-      // Create more complex building geometry
-      const buildingMesh = BABYLON.MeshBuilder.CreateBox(
-        building.id,
-        { width, height, depth },
-        scene
-      );
+    console.log('Building3DView: Creating', BUILDING_DATA.buildings.length, 'buildings...');
+    let buildingCount = 0;
+    
+    BUILDING_DATA.buildings.forEach((building, index) => {
+      try {
+        const height = building.floors * 3;
+        const width = 6 + Math.random() * 2; // Vary building widths
+        const depth = 6 + Math.random() * 2; // Vary building depths
+        
+        // Create more complex building geometry
+        const buildingMesh = BABYLON.MeshBuilder.CreateBox(
+          building.id,
+          { width, height, depth },
+          scene
+        );
+        
+        buildingCount++;
+        
+        if (index < 3) {
+          console.log(`Building3DView: Created building ${index + 1}:`, building.name, 'at position', building.x, building.z);
+        }
       
       // Create PBR material for realistic appearance
       const buildingMaterial = new BABYLON.PBRMaterial(`${building.id}Mat`, scene);
@@ -1050,6 +1083,15 @@ export default function Building3DView({ isActive, onToggle }: Building3DViewPro
       buildingMaterial.invertNormalMapY = true;
       
       buildingMesh.material = buildingMaterial;
+      
+      // Position the building
+      buildingMesh.position.x = building.x;
+      buildingMesh.position.y = height / 2;
+      buildingMesh.position.z = building.z;
+      
+      // Enable shadows
+      shadowGenerator.addShadowCaster(buildingMesh);
+      buildingMesh.receiveShadows = true;
 
       // Add building label
       const label = BABYLON.MeshBuilder.CreatePlane(`${building.id}Label`, { width: 8, height: 2 }, scene);
@@ -1100,7 +1142,12 @@ export default function Building3DView({ isActive, onToggle }: Building3DViewPro
           }
         )
       );
+      } catch (error) {
+        console.error(`Building3DView: Error creating building ${building.name}:`, error);
+      }
     });
+    
+    console.log(`Building3DView: Successfully created ${buildingCount} buildings out of ${BUILDING_DATA.buildings.length}`);
 
     // Create IoT sensors
     BUILDING_DATA.sensors.forEach((sensor, index) => {
@@ -1286,10 +1333,15 @@ export default function Building3DView({ isActive, onToggle }: Building3DViewPro
     };
     window.addEventListener('resize', handleResize);
 
-    // Render loop
+    // Render loop with debugging
     engine.runRenderLoop(() => {
       scene.render();
     });
+    
+    // Add debugging for scene content
+    console.log('Building3DView: Scene created with', scene.meshes.length, 'meshes');
+    console.log('Building3DView: Camera position:', camera.position);
+    console.log('Building3DView: Engine info:', engine.description);
 
     // Cleanup
     return () => {

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Building3DView from '../components/Building3DView';
+import Building3DViewEnhanced from '../components/Building3DViewEnhanced';
 import { 
   Building2, 
   Thermometer, 
@@ -1660,7 +1661,7 @@ export default function SmartBuildings() {
                   </div>
                 </div>
                 
-                <Building3DView 
+                <Building3DViewEnhanced 
                   isActive={isVRActive} 
                   onToggle={handleVRToggle}
                 />
