@@ -1,5 +1,8 @@
-import LLMPlatformEnhanced from './LLMPlatformEnhanced';
+// import LLMPlatformEnhanced from './LLMPlatformEnhanced';
+import LLMPlatformSimple from './LLMPlatformSimple';
 
 export default function LLMPlatform() {
-  return <LLMPlatformEnhanced />;
+  // Temporarily using simple version to debug deployment issue
+  return <LLMPlatformSimple />;
+  // return <LLMPlatformEnhanced />;
 }

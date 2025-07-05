@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en" id="root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCQ LLM - Enterprise AI Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ncq-green': '#16a34a',
+                        'ncq-blue': '#3b82f6',
+                        'ncq-purple': '#8b5cf6',
+                        'ncq-orange': '#f97316',
+                        'ncq-red': '#ef4444',
+                        'ncq-indigo': '#6366f1'
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'cairo': ['Cairo', 'sans-serif']
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'fade-up': 'fadeUp 0.6s ease-out',
+                        'slide-in': 'slideIn 0.8s ease-out',
+                        'bounce-gentle': 'bounceGentle 2s infinite',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'typing': 'typing 3s steps(40) infinite'
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' }
+                        },
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideIn: {
+                            '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        bounceGentle: {
+                            '0%, 100%': { transform: 'translateY(-5px)' },
+                            '50%': { transform: 'translateY(0)' }
+                        },
+                        typing: {
+                            '0%': { width: '0' },
+                            '50%': { width: '100%' },
+                            '100%': { width: '0' }
+                        }
+                    }
+                }
+            },
+            darkMode: 'class'
+        }
+    </script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .dark .glass-effect {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .ncq-gradient {
+            background: linear-gradient(135deg, #16a34a 0%, #059669 100%);
+        }
+        .purple-gradient {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        }
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .blur-heavy { filter: blur(40px); }
+        .product-card {
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+        }
+        .product-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.25);
+        }
+        .dark .product-card {
+            background: rgba(0, 0, 0, 0.4);
+        }
+        .hero-text {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6d28d9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .ai-chat-bubble {
+            animation: fadeUp 0.5s ease-out;
+        }
+        .typing-indicator {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid #8b5cf6;
+            animation: typing 3s steps(40) infinite;
+        }
+    </style>
+</head>
+<body class="font-inter bg-gray-50 dark:bg-gray-900 transition-all duration-300 relative overflow-x-hidden">
+    <!-- Animated Background Blobs -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-20 left-20 w-80 h-80 bg-ncq-purple/30 dark:bg-ncq-purple/20 rounded-full mix-blend-multiply dark:mix-blend-soft-light blur-heavy opacity-70 animate-blob"></div>
+        <div class="absolute top-40 right-40 w-80 h-80 bg-purple-300/30 dark:bg-purple-600/20 rounded-full mix-blend-multiply dark:mix-blend-soft-light blur-heavy opacity-70 animate-blob" style="animation-delay: 2s;"></div>
+        <div class="absolute bottom-40 left-40 w-80 h-80 bg-indigo-300/30 dark:bg-indigo-600/20 rounded-full mix-blend-multiply dark:mix-blend-soft-light blur-heavy opacity-70 animate-blob" style="animation-delay: 4s;"></div>
+        <div class="absolute bottom-20 right-20 w-80 h-80 bg-violet-300/30 dark:bg-violet-600/20 rounded-full mix-blend-multiply dark:mix-blend-soft-light blur-heavy opacity-70 animate-blob" style="animation-delay: 6s;"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-white/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <a href="ncq-platform-comprehensive-demo.html" class="flex items-center space-x-3">
+                        <div class="w-10 h-10 ncq-gradient rounded-xl flex items-center justify-center shadow-lg">
+                            <i class="fas fa-cube text-white text-lg"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold text-gray-900 dark:text-white">NCQ Platform</h1>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">NCQ LLM</p>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="ncq-platform-comprehensive-demo.html" class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-ncq-green transition-colors">
+                        <i class="fas fa-home mr-1"></i>Platform
+                    </a>
+                    <a href="smart-hospitality-page.html" class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-ncq-green transition-colors">Smart Hospitality</a>
+                    <a href="hospital-management-page.html" class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-ncq-green transition-colors">Hospital Management</a>
+                    <a href="payment-gateway-page.html" class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-ncq-green transition-colors">Payment Gateway</a>
+                </nav>
+
+                <!-- Controls -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2 px-3 py-1 bg-ncq-purple/10 border border-ncq-purple/20 rounded-full">
+                        <div class="w-2 h-2 bg-ncq-purple rounded-full animate-pulse"></div>
+                        <span class="text-xs font-medium text-ncq-purple">Live Demo</span>
+                    </div>
+                    <button onclick="openDemo()" class="px-4 py-2 purple-gradient text-white rounded-lg text-sm font-medium hover:scale-105 transition-all">
+                        <i class="fas fa-brain mr-1"></i>Try AI
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-20 pb-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Content -->
+                <div class="animate-fade-up">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="w-16 h-16 purple-gradient rounded-2xl flex items-center justify-center shadow-lg">
+                            <i class="fas fa-brain text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-5xl font-bold hero-text leading-tight">NCQ LLM</h1>
+                            <p class="text-lg text-gray-600 dark:text-gray-300">Enterprise AI Platform</p>
+                        </div>
+                    </div>
+                    <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+                        Advanced artificial intelligence platform with custom language models, privacy-first architecture, 
+                        and enterprise-grade security for your business applications.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 mb-8">
+                        <button onclick="openDemo()" class="px-8 py-4 purple-gradient text-white rounded-xl font-semibold hover:scale-105 transition-all duration-300 shadow-lg">
+                            <i class="fas fa-rocket mr-2"></i>Try AI Assistant
+                        </button>
+                        <button class="px-8 py-4 glass-effect border border-white/20 rounded-xl font-semibold hover:scale-105 transition-all duration-300">
+                            <i class="fas fa-cog mr-2"></i>API Documentation
+                        </button>
+                    </div>
+                    <!-- AI Capabilities -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check text-ncq-purple"></i>
+                            <span class="text-sm text-gray-600 dark:text-gray-300">Custom Models</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check text-ncq-purple"></i>
+                            <span class="text-sm text-gray-600 dark:text-gray-300">Privacy First</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check text-ncq-purple"></i>
+                            <span class="text-sm text-gray-600 dark:text-gray-300">Real-time Processing</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas fa-check text-ncq-purple"></i>
+                            <span class="text-sm text-gray-600 dark:text-gray-300">Enterprise Security</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Chat Interface Preview -->
+                <div class="relative">
+                    <div class="product-card p-6 rounded-2xl border border-white/20 shadow-2xl">
+                        <div class="bg-gradient-to-r from-ncq-purple to-purple-600 p-4 rounded-t-xl">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
+                                    <i class="fas fa-brain text-white"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-white font-semibold">NCQ AI Assistant</h3>
+                                    <p class="text-white/80 text-sm">GPT-4 Enhanced</p>
+                                </div>
+                                <div class="ml-auto flex items-center space-x-1">
+                                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                    <span class="text-white/80 text-xs">Online</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6 h-80 overflow-y-auto space-y-4">
+                            <!-- User Message -->
+                            <div class="flex justify-end">
+                                <div class="bg-purple-100 dark:bg-purple-900/30 text-purple-900 dark:text-purple-100 p-3 rounded-lg max-w-xs">
+                                    <p class="text-sm">Help me analyze our quarterly sales data and identify trends</p>
+                                </div>
+                            </div>
+                            
+                            <!-- AI Response -->
+                            <div class="flex justify-start ai-chat-bubble">
+                                <div class="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-3 rounded-lg max-w-xs">
+                                    <p class="text-sm">I'll help you analyze your quarterly sales data. I can identify trends, patterns, and provide insights on:</p>
+                                    <ul class="text-xs mt-2 space-y-1 text-gray-600 dark:text-gray-400">
+                                        <li>• Revenue growth patterns</li>
+                                        <li>• Product performance</li>
+                                        <li>• Customer segmentation</li>
+                                        <li>• Seasonal variations</li>
+                                    </ul>
+                                    <p class="text-xs mt-2 text-purple-600">Please upload your data file or connect to your database.</p>
+                                </div>
+                            </div>
+
+                            <!-- User Message -->
+                            <div class="flex justify-end">
+                                <div class="bg-purple-100 dark:bg-purple-900/30 text-purple-900 dark:text-purple-100 p-3 rounded-lg max-w-xs">
+                                    <p class="text-sm">Generate a summary report for the executive team</p>
+                                </div>
+                            </div>
+
+                            <!-- AI Typing Indicator -->
+                            <div class="flex justify-start">
+                                <div class="bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-3 rounded-lg">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="flex space-x-1">
+                                            <div class="w-2 h-2 bg-purple-500 rounded-full animate-bounce"></div>
+                                            <div class="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style="animation-delay: 0.1s;"></div>
+                                            <div class="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
+                                        </div>
+                                        <span class="text-xs text-gray-500">AI is thinking...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 border-t border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center space-x-2">
+                                <input type="text" placeholder="Ask anything..." class="flex-1 p-2 text-sm bg-gray-50 dark:bg-gray-800 rounded-lg border-0 focus:ring-2 focus:ring-purple-500">
+                                <button class="p-2 purple-gradient text-white rounded-lg hover:scale-105 transition-all">
+                                    <i class="fas fa-paper-plane text-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Capabilities Section -->
+    <section class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">AI Capabilities</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                    Powerful artificial intelligence features designed for enterprise needs
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Natural Language Processing -->
+                <div class="product-card hover-lift p-8 rounded-2xl border border-white/20">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-comments text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Natural Language Processing</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Advanced NLP capabilities for text analysis, sentiment detection, and language understanding.</p>
+                    <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-2"></i>Text Analysis</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-2"></i>Sentiment Detection</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-2"></i>Language Translation</li>
+                    </ul>
+                </div>
+
+                <!-- Machine Learning Models -->
+                <div class="product-card hover-lift p-8 rounded-2xl border border-white/20">
+                    <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-cogs text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Custom ML Models</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Train and deploy custom machine learning models tailored to your specific business needs.</p>
+                    <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-2"></i>Model Training</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-2"></i>Auto-scaling</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-2"></i>Performance Monitoring</li>
+                    </ul>
+                </div>
+
+                <!-- Computer Vision -->
+                <div class="product-card hover-lift p-8 rounded-2xl border border-white/20">
+                    <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-eye text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Computer Vision</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Image and video analysis with object detection, facial recognition, and content moderation.</p>
+                    <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-2"></i>Object Detection</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-2"></i>Image Classification</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-2"></i>OCR Technology</li>
+                    </ul>
+                </div>
+
+                <!-- Predictive Analytics -->
+                <div class="product-card hover-lift p-8 rounded-2xl border border-white/20">
+                    <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-chart-line text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Predictive Analytics</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Forecast trends, predict outcomes, and make data-driven decisions with advanced analytics.</p>
+                    <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-2"></i>Trend Forecasting</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-2"></i>Risk Assessment</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-2"></i>Anomaly Detection</li>
+                    </ul>
+                </div>
+
+                <!-- Conversational AI -->
+                <div class="product-card hover-lift p-8 rounded-2xl border border-white/20">
+                    <div class="w-16 h-16 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-robot text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Conversational AI</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Build intelligent chatbots and virtual assistants with natural conversation flow.</p>
+                    <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-2"></i>Multi-language Support</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-2"></i>Context Awareness</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-2"></i>Intent Recognition</li>
+                    </ul>
+                </div>
+
+                <!-- API Integration -->
+                <div class="product-card hover-lift p-8 rounded-2xl border border-white/20">
+                    <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-pink-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-plug text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">API Integration</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Easy-to-use APIs for seamless integration with your existing applications and workflows.</p>
+                    <ul class="text-sm text-gray-600 dark:text-gray-300 space-y-1">
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-2"></i>RESTful APIs</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-2"></i>Real-time Endpoints</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-2"></i>SDK Libraries</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases Section -->
+    <section class="py-20 bg-gray-50 dark:bg-gray-800/50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Use Cases</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300">Real-world applications across industries</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass-effect p-8 rounded-2xl border border-white/20">
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-headset text-blue-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Customer Support</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Intelligent chatbots that handle customer inquiries, provide instant support, and escalate complex issues to human agents.</p>
+                </div>
+
+                <div class="glass-effect p-8 rounded-2xl border border-white/20">
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-file-alt text-green-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Document Analysis</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Extract insights from documents, contracts, and reports with advanced text processing and summarization capabilities.</p>
+                </div>
+
+                <div class="glass-effect p-8 rounded-2xl border border-white/20">
+                    <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-bar text-purple-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Business Intelligence</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Turn data into actionable insights with AI-powered analytics, reporting, and decision-making tools.</p>
+                </div>
+
+                <div class="glass-effect p-8 rounded-2xl border border-white/20">
+                    <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900/30 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-shield-alt text-orange-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Fraud Detection</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Detect suspicious activities and prevent fraud with machine learning models that analyze patterns and behaviors.</p>
+                </div>
+
+                <div class="glass-effect p-8 rounded-2xl border border-white/20">
+                    <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-user-friends text-indigo-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Personalization</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Create personalized experiences for users with recommendation engines and content optimization.</p>
+                </div>
+
+                <div class="glass-effect p-8 rounded-2xl border border-white/20">
+                    <div class="w-12 h-12 bg-pink-100 dark:bg-pink-900/30 rounded-xl flex items-center justify-center mb-4">
+                        <i class="fas fa-cog text-pink-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-3">Process Automation</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Automate repetitive tasks and workflows with intelligent automation that learns and adapts over time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Pricing Plans</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300">Choose the plan that fits your needs</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Starter Plan -->
+                <div class="product-card p-8 rounded-2xl border border-white/20 shadow-lg">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Starter</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">Perfect for small teams</p>
+                        <div class="text-4xl font-bold text-ncq-purple mb-1">$99</div>
+                        <div class="text-gray-500 text-sm">per month</div>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-3"></i>1,000 API calls/month</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-3"></i>Basic NLP models</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-3"></i>Email support</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-3"></i>Standard documentation</li>
+                    </ul>
+                    <button class="w-full px-6 py-3 border-2 border-ncq-purple text-ncq-purple rounded-xl font-semibold hover:bg-ncq-purple hover:text-white transition-all">
+                        Get Started
+                    </button>
+                </div>
+
+                <!-- Professional Plan -->
+                <div class="product-card p-8 rounded-2xl border-2 border-ncq-purple shadow-2xl relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-ncq-purple text-white px-4 py-1 rounded-full text-sm font-medium">Most Popular</span>
+                    </div>
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Professional</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">For growing businesses</p>
+                        <div class="text-4xl font-bold text-ncq-purple mb-1">$299</div>
+                        <div class="text-gray-500 text-sm">per month</div>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-3"></i>10,000 API calls/month</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-3"></i>Advanced AI models</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-3"></i>Priority support</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-3"></i>Custom model training</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-3"></i>Analytics dashboard</li>
+                    </ul>
+                    <button class="w-full px-6 py-3 purple-gradient text-white rounded-xl font-semibold hover:scale-105 transition-all">
+                        Start Free Trial
+                    </button>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="product-card p-8 rounded-2xl border border-white/20 shadow-lg">
+                    <div class="text-center mb-8">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Enterprise</h3>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">For large organizations</p>
+                        <div class="text-4xl font-bold text-ncq-purple mb-1">Custom</div>
+                        <div class="text-gray-500 text-sm">contact us</div>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-3"></i>Unlimited API calls</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-3"></i>All AI models</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-3"></i>24/7 dedicated support</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-3"></i>On-premise deployment</li>
+                        <li class="flex items-center"><i class="fas fa-check text-ncq-purple mr-3"></i>Custom integrations</li>
+                    </ul>
+                    <button class="w-full px-6 py-3 border-2 border-ncq-purple text-ncq-purple rounded-xl font-semibold hover:bg-ncq-purple hover:text-white transition-all">
+                        Contact Sales
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="glass-effect p-12 rounded-2xl border border-white/20">
+                <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-6">Ready to Transform Your Business with AI?</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300 mb-8">
+                    Join thousands of companies already using NCQ LLM to automate processes and gain insights
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button onclick="openDemo()" class="px-8 py-4 purple-gradient text-white rounded-xl font-semibold hover:scale-105 transition-all duration-300 shadow-lg">
+                        <i class="fas fa-rocket mr-2"></i>Start Free Trial
+                    </button>
+                    <button class="px-8 py-4 glass-effect border border-white/20 rounded-xl font-semibold hover:scale-105 transition-all duration-300">
+                        <i class="fas fa-calendar mr-2"></i>Book a Demo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 ncq-gradient rounded-xl flex items-center justify-center">
+                        <i class="fas fa-cube text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white">NCQ Platform</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">NCQ LLM - Enterprise AI</p>
+                    </div>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="ncq-platform-comprehensive-demo.html" class="text-gray-600 dark:text-gray-300 hover:text-ncq-purple transition-colors">
+                        <i class="fas fa-home"></i> Platform Home
+                    </a>
+                    <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-ncq-purple transition-colors">
+                        <i class="fas fa-code"></i> API Docs
+                    </a>
+                    <a href="#" class="text-gray-600 dark:text-gray-300 hover:text-ncq-purple transition-colors">
+                        <i class="fas fa-headset"></i> Support
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function openDemo() {
+            window.open('http://localhost:8000', '_blank');
+        }
+
+        // Simulate typing in the chat interface
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add any interactive features here
+            console.log('NCQ LLM page loaded');
+        });
+    </script>
+</body>
+</html>
