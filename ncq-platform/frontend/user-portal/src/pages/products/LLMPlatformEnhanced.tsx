@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Progress } from '@/components/ui/progress';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Slider } from '@/components/ui/slider';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../components/ui/card';
+import { Button } from '../../components/ui/button';
+import { Badge } from '../../components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
+import { Progress } from '../../components/ui/progress';
+import { Input } from '../../components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../components/ui/select';
+import { Switch } from '../../components/ui/switch';
+import { Label } from '../../components/ui/label';
+import { Textarea } from '../../components/ui/textarea';
+import { Slider } from '../../components/ui/slider';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import { Line, Bar, Doughnut } from 'react-chartjs-2';
 import {
