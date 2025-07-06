@@ -48,7 +48,7 @@ import {
   Ship,
   MapPin,
   Clock,
-  Weather,
+  Cloud,
   Wallet,
   QrCode,
   Download,
@@ -70,7 +70,8 @@ import {
   TrendingUp,
   DollarSign,
   Percent,
-  Activity
+  Activity,
+  Plus
 } from 'lucide-react';
 
 // TypeScript interfaces
