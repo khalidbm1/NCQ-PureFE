@@ -1,0 +1,6 @@
+Owner: Khalid bin Ibrahim Al-Muhanna
+Email: khalid.b.m10@gmail.com
+Date: 2026-09-30T22:38:29Z
+SSH key fingerprint: SHA256:z5uM/MYXgyoqCTxcVLNZ88UAeLf8+Mv5tvmPu+wk2hE
+Commitment (SHA-256): e77376cc40fe9178cf1c7f0c85fdd49a08f414aec48b3255f0b55683932e5580
+Verify: printf 'NCQ-OWNERSHIP|Khalid bin Ibrahim Al-Muhanna|%s' "<secret>" | shasum -a 256
