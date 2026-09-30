@@ -1,0 +1,92 @@
+PROPRIETARY SOFTWARE LICENSE
+Copyright (C) 2024-2026 Khalid bin Ibrahim Al-Muhanna. All rights reserved.
+
+NOTICE: This software and all associated documentation, source code, object
+code, APIs, databases, designs, and related materials (collectively, the
+"Software") are the exclusive property of Khalid bin Ibrahim Al-Muhanna (the "Owner") and
+are protected by copyright laws, international copyright treaties, trade
+secret laws, and other intellectual property laws and treaties.
+
+CONFIDENTIAL AND PROPRIETARY
+
+Ownership notice effective 2026-10-01.
+
+1. OWNERSHIP
+   The Software is and shall remain the sole and exclusive property of the
+   Owner. No title to or ownership of the Software or any intellectual
+   property rights therein is transferred to any party by this notice or by
+   any license agreement. No shareholder, partner, director, officer, employee,
+   contractor, or other affiliate of NCQ S.A., and no other person, acquires
+   any title to, or any right to dispose of, the Software by reason of that
+   status.
+
+2. LICENSE TO NCQ S.A.
+   The Owner grants NCQ S.A. ("NCQ") a perpetual, non-exclusive,
+   non-transferable license to use, host, operate, and offer the Software and
+   its services to NCQ's customers. NCQ may grant its customers end-user rights
+   limited to using the Software as a service, or as deployed object code, in
+   the ordinary course of NCQ's business. NCQ has no right to sell, assign,
+   pledge, encumber, or otherwise dispose of the Software or any right in it,
+   to grant any exclusive license in it, or to disclose its source code,
+   except with the Owner's prior written consent.
+   Any other license, including any exclusive license to a third party, may be
+   granted only by the Owner in writing.
+
+3. RESTRICTIONS
+   Unless expressly authorized by the Owner in writing, or by Section 2, no
+   person or entity may:
+   (a) Copy, reproduce, modify, adapt, or create derivative works of the
+       Software, in whole or in part;
+   (b) Distribute, sublicense, lease, rent, loan, sell, or otherwise transfer
+       the Software or any rights therein to any third party;
+   (c) Reverse engineer, disassemble, decompile, or otherwise attempt to
+       derive the source code of the Software;
+   (d) Remove, alter, or obscure any proprietary notices, labels, or marks
+       on or in the Software;
+   (e) Use the Software for any purpose other than as expressly permitted.
+
+4. NO OPEN-SOURCE LICENSE
+   This Software is NOT licensed under any open-source, free software,
+   permissive, or copyleft license. No rights are granted under the MIT,
+   Apache, GPL, LGPL, BSD, MPL, AGPL, or any other open-source license.
+   No rights are granted except as expressly set forth in this license or in
+   a written agreement executed by the Owner.
+
+5. THIRD-PARTY COMPONENTS
+   Third-party components included in or used by the Software remain subject
+   to their own licenses. This notice does not affect the rights of their
+   owners.
+
+6. CONFIDENTIALITY
+   The Software constitutes confidential and proprietary trade secret
+   information of the Owner. Any person who obtains access to the Software
+   must maintain its confidentiality and may not disclose it to any third
+   party without the prior written consent of the Owner.
+
+7. NO WARRANTY
+   THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT.
+
+8. LIMITATION OF LIABILITY
+   IN NO EVENT SHALL THE OWNER BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL,
+   CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS OR REVENUES,
+   WHETHER INCURRED DIRECTLY OR INDIRECTLY, ARISING OUT OF THE USE OF OR
+   INABILITY TO USE THE SOFTWARE.
+
+9. TERMINATION
+   Any unauthorized use of the Software automatically terminates any license
+   granted herein and may subject the unauthorized user to civil and criminal
+   penalties under applicable law.
+
+10. GOVERNING LAW
+   This license shall be governed by and construed in accordance with the
+   laws of the Kingdom of Saudi Arabia, without regard to its conflict of law
+   provisions.
+
+For licensing inquiries:  licensing@ncq.sa (on behalf of the Owner)
+For technical support:    support@ncq.sa
+General inquiries:        info@ncq.sa
+
+Owner: Khalid bin Ibrahim Al-Muhanna
+Licensee: NCQ S.A. (https://ncq.sa)
