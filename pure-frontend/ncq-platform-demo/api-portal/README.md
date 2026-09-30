@@ -92,4 +92,4 @@ REDIS_URL=redis://localhost:6379
 
 ## License
 
-Copyright © 2024 NCQ. All rights reserved.
+Copyright © 2024 Khalid bin Ibrahim Al-Muhanna. All rights reserved.
