@@ -205,7 +205,7 @@ The Firebase configuration is stored in:
 
 ## 📄 License
 
-This project is proprietary software owned by NCQ Solutions.
+This project is proprietary software owned by Khalid bin Ibrahim Al-Muhanna, licensed to NCQ Solutions.
 
 ## 🤝 Support
 
